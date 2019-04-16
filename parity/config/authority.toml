@@ -1,0 +1,131 @@
+[parity]
+chain = "/parity/config/chain.json"
+base_path = "/parity"
+db_path = "/parity/chains"
+keys_path = "/parity/keys"
+identity = ""
+light = false
+mode = "last"
+mode_timeout = 300
+mode_alarm = 3600
+auto_update = "none"
+release_track = "current"
+public_node = false
+no_download = false
+no_consensus = false
+no_persistent_txqueue = false
+
+[ui]
+force = false
+disable = true
+port = 8180
+interface = "0.0.0.0"
+path = "/parity/signer"
+
+[rpc]
+disable = false
+port = 8545
+interface = "0.0.0.0"
+cors = []
+apis = ["web3", "eth", "net", "parity", "traces", "rpc", "secretstore"]
+hosts = ["none"]
+
+[websockets]
+disable = false
+port = 8546
+interface = "0.0.0.0"
+origins = ["none"]
+apis = ["web3", "eth", "net", "parity", "traces", "rpc", "secretstore"]
+hosts = ["none"]
+
+[ipc]
+disable = false
+path = "/parity/jsonrpc.ipc"
+apis = ["web3", "eth", "net", "parity", "parity_accounts", "personal", "traces", "rpc", "secretstore"]
+
+[dapps]
+disable = false
+path = "/parity/dapps"
+
+[secretstore]
+disable = false
+nodes = []
+http_interface = "0.0.0.0"
+http_port = 8082
+interface = "0.0.0.0"
+port = 8083
+path = "/parity/secretstore"
+
+[ipfs]
+enable = false
+port = 5001
+interface = "0.0.0.0"
+cors = []
+hosts = ["none"]
+
+[network]
+port = 30303
+min_peers = 25
+max_peers = 50
+nat = "any"
+discovery = true
+warp = true
+allow_ips = "all"
+snapshot_peers = 0
+max_pending_peers = 64
+no_serve_light = false
+reserved_only = false
+bootnodes = ["enode://a9327d37d07799817d4a3e13d49fb4f5cc1486d4adf3ec8a6b98be62c4d7a5453914a5139dbe124809a388514cb0be37f9fa799539abe2250672f6d3d778b821@18.191.209.251:30303",
+"enode://8185e15b0e269e19b9051ba2c3bab9160f0e52a8e5e2cef626013142d957c4256f0b18e80965a9fa9acabdb2ba07890c995ad354cbda0fa812ded5a5ce878321@3.121.61.202:30303",
+"enode://38fab1370b042170b37ebd758d07c17b7aa4fd4ff21db8e8f120ade9cf17835ae67fd014a047ee171952fba2a05a90505fedbe98c883b20e4501d437aec8b831@3.122.42.125:30303",
+"enode://d2fdbd9efe681080410775dbe986014e21a6a096b6dfd7d2c499f3b893951adf3aae0164392404f6269d231192735bd0c8da3d022639e8a36d8d17299daa632a@3.122.18.27:30303",
+"enode://9745ffa93cde2a0e22528fbd4a4f8b5102035ab8c7a781918c9ef92dee6e5a21635dfd106ccfbcf24f4fdd52e8fb513b7f3f55ced90c9b61f2cd756bccd7f660@18.210.141.224:30303",
+"enode://4c36427e744783bcbc595a7fbbe785951130d8d4fe9f2206c78538fcf43fb19172df8a577c4ae0c91b7627b057bdf148666a7e4e428650e677f9c443e59479e4@3.86.127.87:30303",
+"enode://b447c1eaad456996ae4ce965a01d543b8f4b0d7e78e23d2cc2d328fe0e0b87dac55eaebe9a27ae24fb879cf056b52b11d967d37a731f5f5987ec4fc0dfb4d908@34.236.121.163:30303",
+"enode://916dba32ba88b7a5554d862b5a01b5eddf805788545f2ba6ee682f1cfe08eac132b71a4d725bc73c7b687496e525bf414e7d90cd223dacebe1946e3bb464bca0@18.136.95.237:30303",
+"enode://a46393687ee9fbe798aba517d8f92443e45ed7e5ea85aa996c62998088607d57b000001945063045584861652802325d93828cef29a9eb966772f75521dff8c6@3.0.157.214:30303",
+"enode://94b92761837031a7afbbc7e6a4363baf6c5f04c7766ab63f4f5b47c98be30faef6e5e91d30cc08dd682a6dc16cdd4f85ec6843f4ac9f18887d4da20b04878ea6@52.220.46.9:30303"]
+
+reserved_peers = "/parity/config/enodeList.list"
+
+[account]
+password = ["/parity/authority.pwd"]
+keys_iterations = 10240
+
+[footprint]
+tracing = "auto"
+pruning = "auto"
+pruning_history = 64
+pruning_memory = 500
+cache_size_db = 64
+cache_size_blocks = 8
+cache_size_queue = 50
+cache_size_state = 25
+cache_size = 128 # Overrides above caches with total size
+fast_and_loose = false
+db_compaction = "ssd"
+fat_db = "auto"
+scale_verifiers = true
+num_verifiers = 6
+
+[snapshots]
+disable_periodic = false
+
+[misc]
+logging = "info"
+log_file = "/parity/parity.log"
+color = true
+
+[mining]
+force_sealing = true
+usd_per_tx = "0.000000000000000001"
+usd_per_eth = "1"
+price_update_period = "hourly"
+gas_cap = "800000000"
+gas_floor_target = "80000000"
+tx_gas_limit = "80000000"
+extra_data = "Parity"
+tx_queue_mem_limit= 0
+tx_queue_size = 20000
+tx_queue_per_sender = 20000
+engine_signer = "0xe5c79d9be9c548fc7973314682c80f1bf18db597"

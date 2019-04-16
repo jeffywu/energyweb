@@ -1,0 +1,58 @@
+version: '2.2'
+
+# This logging driver sends the eth-logger application logs to Splunk.
+# You may want to use a different HEC token to ensure that the application logs
+# are not in the same index as the Ethereum transactions.
+x-logging: &default-logging
+  driver: 'splunk'
+  options:
+    splunk-token: ''
+    splunk-url: ''
+    splunk-insecureskipverify: 'true'
+    splunk-verify-connection: 'false'
+    splunk-format: 'json'
+    tag: '{{.Name}}-{{.ID}}'
+
+services:
+  parity:
+    container_name: parity
+    image: parity/parity:stable
+    command:
+      --config /parity/config/authority.toml
+    volumes:
+      - ${PWD}/parity:/parity
+    ports:
+      - 30303:30303
+      - 30303:30303/udp
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - ${PWD}/redisdb:/data
+      - ${PWD}/redis.conf:/redis.conf
+
+  eth-logger:
+    container_name: eth-logger
+    image: jeffywu/ethereum-logger:latest
+    restart: on-failure
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - EXPRESS_PORT=3000
+    volumes:
+      - ${PWD}/eth-logger/abi:/app/abi
+      - ${PWD}/eth-logger/.env:/app/.env
+      - ${PWD}/eth-logger/.checkpoint:/app/.checkpoint
+      - ${PWD}/parity:/parity
+    command: node index.js backfill 11000001 11747788
+    ulimits:
+      nofile:
+        soft: 9000
+        hard: 9000
+    #logging: *default-logging
+    depends_on:
+      - redis
+      - parity
